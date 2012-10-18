@@ -1,0 +1,24 @@
+web1:
+  shared_writable_dirs:
+      - app/cache
+      - app/logs
+  document_root: web
+  default_gateway: app.php
+  index_list: [app.php]
+  php_extensions:
+    - intl
+    - mbstring
+    - xsl
+    - apc
+    - mysql
+    - posix
+    - iconv
+    - tokenizer
+    - xml
+    - pdo_mysql
+    - zip
+  php_session_autostart: Off
+  php_short_open_tag: Off
+  magic_quotes_gpc: Off
+db1:
+  type: mysql
