@@ -1,5 +1,22 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
-    {% block fos_user_content %}{% endblock %}
+    <div class="centered_form">
+        {% block fos_user_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block nav %}
+    <ul>
+        {% if app.user %}
+            <li><a href="/">Home</a></li>
+            <li><a href="{{ path('fos_user_profile_show') }}">View profile</a></li>
+            <li><a href="{{ path('fos_user_profile_edit') }}">Edit profile</a></li>
+            <li><a href="{{ path('fos_user_change_password') }}">Change password</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}
+
+{% block content_header %}
+    
 {% endblock %}

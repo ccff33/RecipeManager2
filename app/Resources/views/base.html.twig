@@ -5,8 +5,29 @@
 {% endblock %}
 
 {% block header_right %}
+    {% if app.user %}
+        Username:
+        <br>
+        <a href="{{ path('fos_user_profile_show') }}">
+            {{ app.user.username }}
+        </a>
+        <br>
+        Last login:
+        <br>
+        {{ app.user.lastLogin.format('d-m-Y H:i:s') }}
+        <br>
+        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+    {% endif %}
+{% endblock %}
+        
+{% block title %}
+        Recipe Manager 2
 {% endblock %}
  
+{% block nav %}
+    <ul></ul>
+{% endblock %}
+    
 {% block content_header %}
 {% endblock %}
     
