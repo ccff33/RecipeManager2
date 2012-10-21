@@ -1,1 +1,8 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <a href="{{ path('fos_user_profile_show') }}">View profile</a><br>
+    <a href="{{ path('fos_user_profile_edit') }}">Edit profile</a><br>
+    <a href="{{ path('fos_user_change_password') }}">Change password</a>
+    
+{% endblock %}
