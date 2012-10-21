@@ -12,7 +12,7 @@ framework:
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
-    templating:      { engines: ['haml', 'twig'] } #assets_version: SomeVersionScheme
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
     trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
@@ -57,3 +57,8 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+    
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: RM2\UserBundle\Entity\User
