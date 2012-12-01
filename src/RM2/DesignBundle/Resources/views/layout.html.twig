@@ -31,6 +31,11 @@
         </nav>
         <section>
             <header>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-message">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
                 {% block content_header %}
                     content_header
                 {% endblock %}

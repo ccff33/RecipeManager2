@@ -13,9 +13,6 @@
         </a>
         <br>
         Last login:
-        <br>
-        {{ app.user.lastLogin.format('d-m-Y H:i:s') }}
-        <br>
         <a href="{{ path('fos_user_security_logout') }}">Logout</a>
     {% endif %}
 {% endblock %}

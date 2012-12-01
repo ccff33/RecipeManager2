@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block content_header %}
+    <h1>OK, Choose what you want to do.</h1>
+{% endblock %}
+    
+{% block nav %}
+    <ul>
+        <li><a href="{{ path('recipe_new') }}">Add</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <p>We currently have a database of {{ recipeCount }} recipes.</p>
+{% endblock %}

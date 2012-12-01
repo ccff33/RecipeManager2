@@ -1,7 +1,14 @@
 rm2_recipes:
     resource: "@RM2RecipesBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /recipe
+
+root:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: recipe
+        permanent: true
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

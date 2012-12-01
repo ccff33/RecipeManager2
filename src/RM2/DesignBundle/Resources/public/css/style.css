@@ -171,3 +171,10 @@ header #right a:hover {
 .centered_form ul {
     background: #dd6666;
 }
+
+.flash-message {
+    margin: 0 auto;
+    padding: 4px;
+    text-align: center;
+    background: #aaccff;
+}

@@ -22,7 +22,8 @@ class AppKernel extends Kernel
             new RM2\RecipesBundle\RM2RecipesBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new RM2\UserBundle\RM2UserBundle(),
-            new RM2\DesignBundle\RM2DesignBundle()
+            new RM2\DesignBundle\RM2DesignBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
