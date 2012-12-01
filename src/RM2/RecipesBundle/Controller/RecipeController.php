@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use RM2\RecipesBundle\Entity\Recipe;
 use RM2\RecipesBundle\Form\RecipeType;
 
+/**
+ * @Route("/recipe")
+ */
 class RecipeController extends Controller {
 
     /**

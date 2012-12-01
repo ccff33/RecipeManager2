@@ -12,4 +12,5 @@
 
 {% block content %}
     <p>We currently have a database of {{ recipeCount }} recipes.</p>
+    <a href="{{ path('recipe_search_name_like') }}">Search By Name</a>
 {% endblock %}

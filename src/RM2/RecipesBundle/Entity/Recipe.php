@@ -30,6 +30,10 @@ class Recipe {
      */
     protected $creator;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="RM2\RecipesBundle\Entity\Ingredient")
+     */
+    protected $ingredients;
 
     /**
      * Get id
@@ -108,5 +112,45 @@ class Recipe {
     public function getCreator()
     {
         return $this->creator;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add ingredients
+     *
+     * @param \Entity\Ingredient $ingredients
+     * @return Recipe
+     */
+    public function addIngredient(\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients[] = $ingredients;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ingredients
+     *
+     * @param \Entity\Ingredient $ingredients
+     */
+    public function removeIngredient(\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients->removeElement($ingredients);
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
     }
 }

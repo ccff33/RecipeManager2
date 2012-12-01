@@ -1,7 +1,6 @@
 rm2_recipes:
     resource: "@RM2RecipesBundle/Controller/"
-    type:     annotation
-    prefix:   /recipe
+    type: annotation
 
 root:
     pattern: /

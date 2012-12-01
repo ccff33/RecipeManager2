@@ -6,29 +6,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RecipeType extends AbstractType
+class IngredientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('description')
-            ->add('ingredients', 'entity',
-                  array('class' => 'RM2\RecipesBundle\Entity\Ingredient',
-                        'property' => 'name',
-                        'multiple' => true))
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'RM2\RecipesBundle\Entity\Recipe'
+            'data_class' => 'RM2\RecipesBundle\Entity\Ingredient'
         ));
     }
 
     public function getName()
     {
-        return 'rm2_recipesbundle_recipetype';
+        return 'rm2_recipesbundle_ingredienttype';
     }
 }

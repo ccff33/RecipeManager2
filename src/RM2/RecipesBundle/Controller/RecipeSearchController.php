@@ -10,7 +10,7 @@ use RM2\RecipesBundle\Entity\Recipe;
 use RM2\RecipesBundle\Form\RecipeType;
 
 /**
- * @Route("/search")
+ * @Route("/recipe/search")
  */
 class RecipeSearchController extends Controller {
     
