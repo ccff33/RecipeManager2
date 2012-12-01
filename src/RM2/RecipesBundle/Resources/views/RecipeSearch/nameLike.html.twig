@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block content_header %}
+    Search by name
+{% endblock %}
+    
+{% block content %}
+    <form action="{{ path('recipe_search_name_like') }}">
+        <label>Name:</label>
+        <input type="text" name="name" />
+    </form>
+   <table class="recipe-list">
+        <tr>
+            <th>{{ pagination.sortable('Id', 'r.id')|raw }}</th>
+            <th {% if pagination.isSorted('r.Name') %} class="sorted" {% endif %}>
+                {{ pagination.sortable('Name', 'r.name')|raw }}
+            </th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        {% for recipe in pagination %}
+        <tr {% if loop.index is odd %} class="color" {% endif %}>
+            <td>{{ recipe.id }}</td>
+            <td>{{ recipe.name }}</td>
+            <td>{{ recipe.creator.username }}</td>
+            <td>
+                <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
+                {% if recipe.creator == app.user %}
+                    <a href="{{ path('recipe_edit', { 'id': recipe.id}) }}">edit</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div id="navigation">
+        {{ pagination.render()|raw }}
+    </div>
+{% endblock %}
