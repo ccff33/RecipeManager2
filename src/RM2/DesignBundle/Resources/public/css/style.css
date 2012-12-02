@@ -282,6 +282,13 @@ td, th, tr {
     padding: 0;
 }
 
+#ingredient-name-filter {
+    width: 198px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
 #ingredients ul {
     width: 100%;
     list-style: none;

@@ -38,6 +38,22 @@ class IngredientController extends Controller
     }
     
     /**
+     * @Route("/name-like/{name}", name="ingredient_list_name_like", defaults={"name"=""})
+     */
+    public function filterNameLikeAction($name) {
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('RM2RecipesBundle:Ingredient')->getIngredientsWithNameLike($name);
+        
+        $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
+        $json = $serializer->serialize($entities, 'json');
+        
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application\json');
+        
+        return $response;
+    }
+        
+    /**
      * Finds and displays a Ingredient entity.
      *
      * @Route("/{id}/show", name="ingredient_show")

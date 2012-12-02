@@ -24,6 +24,19 @@
         </div>
     </form>
     <script>
+        function loadIngredientsJsonData(data) {
+            var list = $("#ingredients ul");
+            $.each(data, function(i, item) {
+                var li = $("<li></li>").attr("data-id", item.id)
+                                       .text(item.name)
+                                       .appendTo(list);
+            });
+            $("#ingredients li").draggable({
+                appendTo: "body",
+                helper: "clone"
+            });
+        }
+        
         $(document).ready(function() {
         
             $("#search-criteria ul").droppable({
@@ -47,22 +60,28 @@
             });
         
             $.post("{{ path('ingredient_list') }}", function (data) {
-                var list = $("#ingredients ul");
-                $.each(data, function(i, item) {
-                    var li = $("<li></li>").attr("data-id", item.id)
-                                           .text(item.name)
-                                           .appendTo(list);
-                });
-                $("#ingredients li").draggable({
-                    appendTo: "body",
-                    helper: "clone"
-                });
+                loadIngredientsJsonData(data)
             }, 'json');
+            
+            $('#ingredient-name-filter').change(function() {
+                var value = $(this).attr("value");
+                var path = "";
+                if (value != ""){
+                    path = "{{ path('ingredient_list_name_like') }}/" + value
+                } else {
+                    path = "{{ path('ingredient_list') }}"
+                }
+                $.post(path, function (data) {
+                    $("#ingredients li").remove();
+                    loadIngredientsJsonData(data)
+                }, 'json');
+            });
         
         });
     </script>
     <div style="width:100%;overflow: hidden;">
         <div class="right">
+            <input id="ingredient-name-filter" type="text" name="name">
             <div id="ingredients">
                 <ul>
                 </ul>
