@@ -24,6 +24,6 @@ web1:
     - "if [ ! -f composer.phar ];  then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install"
   before_deploy:
     - "php app/console doctrine:schema:update --force"
-	- "php app/console doctrine:fixtures:load"
+    - "php app/console doctrine:fixtures:load"
 db1:
   type: mysql
