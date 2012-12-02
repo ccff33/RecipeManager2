@@ -4,7 +4,7 @@ namespace RM2\RecipesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="RM2\RecipesBundle\Repository\RecipeRepository")
  */
 class Recipe {
     

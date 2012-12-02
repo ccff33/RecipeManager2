@@ -21,22 +21,15 @@ class RecipeSearchController extends Controller {
      * @Template()
      */
     public function byIngredientsAction(Request $request) {
-        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('RM2RecipesBundle:Recipe');
         
-        $ids = $request->get('ingredients');
-        
-        $qb->select('r')
-           ->from('RM2RecipesBundle:Recipe', 'r')
-           ->leftJoin('r.ingredients', 'i')
-           ->where($qb->expr()->in('i.id', ':ids'))
-           ->groupBy('r.id')
-           ->having($qb->expr()->eq($qb->expr()->count('r'), count($ids)))
-           ->setParameter('ids', $ids);
+        $recipes = $repository->getRecipesWithAllIngredients($request->get('ingredients'));
         
         $paginator = $this->get('knp_paginator');
         
         $pagination = $paginator->paginate(
-            $qb->getQuery()->getResult(),
+            $recipes,
             $request->get('page', 1),
             $this->defaultPageSize
         );
@@ -51,17 +44,13 @@ class RecipeSearchController extends Controller {
      * @Template()
      */
     public function nameLikeAction(Request $request) {
-        $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder();
-     
-        $qb->select('r')
-           ->from('RM2RecipesBundle:Recipe', 'r')
-           ->where($qb->expr()->like('r.name', ':name'))
-           ->setParameter('name', '%' . $request->get('name') . '%');
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('RM2RecipesBundle:Recipe');
         
         $paginator = $this->get('knp_paginator');
         
         $pagination = $paginator->paginate(
-            $qb,
+            $repository->getRecipesWithNameLike($request->get('name')),
             $request->get('page', 1),
             $this->defaultPageSize
         );
