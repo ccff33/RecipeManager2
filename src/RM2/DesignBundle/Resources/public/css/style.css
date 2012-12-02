@@ -14,6 +14,7 @@ body {
 }
 
 section {
+    overflow: hidden;
     background: #ffffff;
     border: 1px solid #e2e2e2;
     border-radius: 6px;
@@ -40,8 +41,25 @@ section header {
     border-bottom: 1px solid #ddd;
 }
 
-footer {
+section header h1 {
+    font-size: 1.2em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
+section #content {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+section .left {
+    float: left;
+    width: 720px;
+}
+
+section .right {
+    float: right;
+    width: 200px;
 }
 
 section footer {
@@ -81,7 +99,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-    background: #ddeebb;
+    background: #ddffcc;
 }
 
 nav a {
@@ -177,4 +195,148 @@ header #right a:hover {
     padding: 4px;
     text-align: center;
     background: #aaccff;
+}
+
+.recipe-list {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    line-height: 1.5em;
+}
+
+.recipe-list th {
+    background: #ddd;
+}
+
+td, th, tr {
+    margin: 0;
+    padding: 5px;
+}
+
+.recipe-list .color {
+    background: #ddffcc;
+}
+
+.name-filter {
+    margin: 5px;
+}
+
+.name-filter input {
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding-left: 20px;
+}
+
+#search-criteria {
+    overflow: hidden;
+    height: 35px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#search-criteria ul {
+    list-style: none;
+    background: #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 5px;
+    margin: 0;
+    height: 35px;
+    width: 100%;
+}
+
+#search-criteria input[type="Submit"] {
+    border: 1px solid #ccc;
+    height: 35px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+#search-criteria li {
+    display: inline;
+    border: 1px solid #c0c0c0;
+    background: #eee;
+    border-radius: 6px;
+    padding: 3px;
+    margin: 3px;
+    vertical-align: middle;
+}
+
+#search-criteria button {
+    background: #eee;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+#ingredients {
+    margin: 0 auto;
+    padding: 0;
+}
+
+#ingredients ul {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#ingredients li {
+    background: #eee;
+    border-radius: 6px;
+    padding: 3px;
+    margin-bottom: 3px;
+}
+
+#record {
+    width: 500px;
+    margin: 0 auto;
+}
+
+#record input {
+    height: 20px;
+}
+
+#record input, #record textarea, #record select {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+#record button {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    height: 35px;
+}
+
+#record tr {
+    background: #eee;
+    text-align: left;
+}
+
+.search-buttons {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-buttons button {
+    background: #eee;
+    width: 200px;
+    height: 75px;
+    border-radius: 6px;
+    margin: 5px;
+    padding: 5px;
+    text-decoration: none;
+    border: 1px solid #ccc;
 }

@@ -1,90 +1,102 @@
 {% extends '::base.html.twig' %}
 
-{% block content_header %}
-Search by ingredients
+{% block nav %}
+    <ul>
+        <li>
+            <a href="{{ path('recipe') }}">Home</a>
+        </li>
+    </ul>
 {% endblock %}
 
+{% block content_header %}
+    <h1>Search by ingredients</h1>
+{% endblock %}
+    
 {% block content %}
-<form action="{{ path('recipe_search_by_ingredients') }}" method="post">
-    <div id="search-criteria">
-        <ol>
-            <li class="placeholder">Drop some ingredients here</li>
-        </ol>
-    </div>
-    <input type="submit" value="Search">
-</form>
-<script>
-    $(document).ready(function() {
-        $("#search-criteria ol").droppable({
-            drop: function(event, ui) {
-                $(this).find(".placeholder").remove();
-                var li = $("<li></li>").text(ui.draggable.find(".ingredient-name").text());
-                var input = $("<input type=\"hidden\" name=\"ingredients[]\">")
-                                    .attr("value", ui.draggable.find(".ingredient-id").text());
-                var remove = $("<button class=\"remove\"></button>").text("X")
-                li.appendTo(this);
-                input.appendTo(li);
-                remove.appendTo(li);
-                ui.draggable.css("display", "none");
-            }
-        });
-        $(".remove").live("click", function() {
-            var li = $(this).parent("li");
-            var id = li.find("input").attr("value");
-            $("#ingredients .ingredient-id:contains(" + id + ")").parent("tr").css("display", "block");
-            if ($("#search-criteria li").length <= 1) {
-                li.text("Drop some ingredients here").attr("class", "placeholder");
-            } else {
-                li.remove();
-            }
-        });
-        
-        $.post("{{ path('ingredient_list') }}", function (data) {
-            var table = $("#ingredients table");
-            $.each(data, function(i, item) {
-                var tr = $("<tr></tr>").appendTo(table);
-                var id = $("<td class=\"ingredient-id\" style=\"display:none\"></td>")
-                            .text(item.id).appendTo(tr);
-                var name = $("<td class=\"ingredient-name\"></td>")
-                            .text(item.name).appendTo(tr);
-            });
-            $("#ingredients tr").draggable({
-                appendTo: "body",
-                helper: "clone"
-            });
-        }, 'json');
-        
-    });
-</script>
-<div id="ingredients">
-    <table>
-        
-    </table>
-</div>
-    <table class="recipe-list">
-        <tr>
-            <th>{{ pagination.sortable('Id', 'r.id')|raw }}</th>
-            <th {% if pagination.isSorted('r.Name') %} class="sorted" {% endif %}>
-                {{ pagination.sortable('Name', 'r.name')|raw }}
-                </th>
-                <th>Creator</th>
-                <th>Actions</th>
-            </tr>
-        {% for recipe in pagination %}
-            <tr {% if loop.index is odd %} class="color" {% endif %}>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.name }}</td>
-                <td>{{ recipe.creator.username }}</td>
-                <td>
-                    <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
-                {% if recipe.creator == app.user %}
-                    <a href="{{ path('recipe_edit', { 'id': recipe.id}) }}">edit</a>
-                {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </table>
-        <div id="navigation">
-        {{ pagination.render()|raw }}
+    <form action="{{ path('recipe_search_by_ingredients') }}" method="get">
+        <div id="search-criteria">
+            <div class="left">
+                <ul></ul>
             </div>
+            <div class="right">
+                <input type="submit" value="Search">
+            </div>
+        </div>
+    </form>
+    <script>
+        $(document).ready(function() {
+        
+            $("#search-criteria ul").droppable({
+                drop: function(event, ui) {
+                    var li = $("<li></li>").text(ui.draggable.text());
+                    var input = $("<input type=\"hidden\" name=\"ingredients[]\">")
+                                        .attr("value", ui.draggable.data("id"));
+                    var remove = $("<button class=\"remove\"></button>").text("X")
+                    li.appendTo(this);
+                    input.appendTo(li);
+                    remove.appendTo(li);
+                 ui.draggable.hide();
+                }
+            });
+        
+            $(".remove").live("click", function() {
+                var li = $(this).parent("li");
+                var id = li.find("input").attr("value");
+                $("#ingredients li[data-id='" + id + "']").show();
+                li.remove();
+            });
+        
+            $.post("{{ path('ingredient_list') }}", function (data) {
+                var list = $("#ingredients ul");
+                $.each(data, function(i, item) {
+                    var li = $("<li></li>").attr("data-id", item.id)
+                                           .text(item.name)
+                                           .appendTo(list);
+                });
+                $("#ingredients li").draggable({
+                    appendTo: "body",
+                    helper: "clone"
+                });
+            }, 'json');
+        
+        });
+    </script>
+    <div style="width:100%;overflow: hidden;">
+        <div class="right">
+            <div id="ingredients">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div class="left">
+            {% if pagination.count > 0 %}
+                <table class="recipe-list">
+                    <tr>
+                        <th>{{ pagination.sortable('Id', 'r.id')|raw }}</th>
+                        <th {% if pagination.isSorted('r.Name') %} class="sorted" {% endif %}>
+                            {{ pagination.sortable('Name', 'r.name')|raw }}
+                        </th>
+                        <th>Creator</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for recipe in pagination %}
+                        <tr {% if loop.index is odd %} class="color" {% endif %}>
+                            <td>{{ recipe.id }}</td>
+                            <td>{{ recipe.name }}</td>
+                            <td>{{ recipe.creator.username }}</td>
+                            <td>
+                                <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
+                                {% if recipe.creator == app.user %}
+                                    <a href="{{ path('recipe_edit', { 'id': recipe.id}) }}">edit</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div id="navigation">
+                    {{ pagination.render()|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

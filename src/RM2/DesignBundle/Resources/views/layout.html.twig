@@ -43,9 +43,11 @@
                     content_header
                 {% endblock %}
             </header>
-            {% block content %}
-                content
-            {% endblock %}
+            <div id="content">
+                {% block content %}
+                    content
+                {% endblock %}
+            </div>
             <footer>
                 {% block content_footer %}
                     content_footer

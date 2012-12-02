@@ -1,7 +1,7 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block content_header %}
-    Login
+    <h1>Login</h1>
 {% endblock %}
 
 {% block fos_user_content %}
@@ -23,6 +23,6 @@
 
             <input type="submit" id="submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
         </form>
+        <a href="{{ path('fos_user_registration_register') }}">Register</a>
     </div>
-    <a href="{{ path('fos_user_registration_register') }}">Register</a>
 {% endblock %}

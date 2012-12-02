@@ -1,22 +1,25 @@
 {% extends '::base.html.twig' %}
 
-{% block content %}
-<h1>Recipe creation</h1>
-
-<form action="{{ path('recipe_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-
-<a href="{{ path('ingredient_new') }}">Miss an Ingredient?</a>
-
-<ul class="record_actions">
+{% block nav %}
+<ul>
     <li>
-        <a href="{{ path('recipe') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('recipe') }}">Home</a>
     </li>
 </ul>
+{% endblock %}
+
+{% block content_header %}
+    <h1>Recipe creation</h1>
+{% endblock %}
+
+{% block content %}
+<div id="record">
+    <form action="{{ path('recipe_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+    <a href="{{ path('ingredient_new') }}">Miss an Ingredient?</a>
+</div>
 {% endblock %}
