@@ -3,7 +3,11 @@
 namespace RM2\RecipesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,6 +21,21 @@ use RM2\RecipesBundle\Form\IngredientType;
  */
 class IngredientController extends Controller
 {
+    /**
+     * @Route("/", name="ingredient_list")
+     */
+    public function indexAction() {
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('RM2RecipesBundle:Ingredient')->findAll();
+        
+        $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
+        $json = $serializer->serialize($entities, 'json');
+        
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application\json');
+        
+        return $response;
+    }
     
     /**
      * Finds and displays a Ingredient entity.
