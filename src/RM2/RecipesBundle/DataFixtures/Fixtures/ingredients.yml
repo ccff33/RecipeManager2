@@ -1,0 +1,16 @@
+Ingredient:
+    water:
+        name: вода
+    eggs:
+        name: яйца
+    oil:
+        name: олио
+    rice:
+        name: ориз
+    onion:
+        name: лук
+    salt:
+        name: сол
+    potato:
+        name: картоф
+    

@@ -1,0 +1,27 @@
+Recipe:
+    scrambled_eggs:
+        name: бъркани яйца
+        description: |
+            описание
+        User: seppen
+        Ingredient:
+            - oil
+            - eggs
+    scrambled_eggs_with_onion:
+        name: бъркани яйца с лук
+        description: |
+            описание
+        User: smith
+        Ingredient:
+            - oil
+            - eggs
+            - onion
+    rice_with_onion:
+        name: ориз с лук
+        description: |
+            описание
+        User: seppen
+        Ingredient:
+            - rice
+            - water
+            - onion

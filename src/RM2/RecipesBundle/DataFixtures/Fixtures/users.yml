@@ -1,0 +1,11 @@
+User:
+    seppen:
+        username: seppen
+        email: seppen@example.com
+        password: pass
+        enabled: true
+    smith:
+        username: smith
+        email: smith@example.com
+        password: pass
+        enabled: true

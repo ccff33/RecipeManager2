@@ -31,7 +31,7 @@ class Recipe {
     protected $creator;
     
     /**
-     * @ORM\ManyToMany(targetEntity="RM2\RecipesBundle\Entity\Ingredient")
+     * @ORM\ManyToMany(targetEntity="Ingredient")
      */
     protected $ingredients;
 
@@ -124,10 +124,10 @@ class Recipe {
     /**
      * Add ingredients
      *
-     * @param \Entity\Ingredient $ingredients
+     * @param Ingredient $ingredients
      * @return Recipe
      */
-    public function addIngredient(\Entity\Ingredient $ingredients)
+    public function addIngredient(Ingredient $ingredients)
     {
         $this->ingredients[] = $ingredients;
     
@@ -137,9 +137,9 @@ class Recipe {
     /**
      * Remove ingredients
      *
-     * @param \Entity\Ingredient $ingredients
+     * @param Ingredient $ingredients
      */
-    public function removeIngredient(\Entity\Ingredient $ingredients)
+    public function removeIngredient(Ingredient $ingredients)
     {
         $this->ingredients->removeElement($ingredients);
     }
